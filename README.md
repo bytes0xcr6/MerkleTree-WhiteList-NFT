@@ -1,2 +1,60 @@
-# MerkleTree-WhiteList-NFT
-Solidity NFT whitelist contract example using MerkleTree.js for constructing merkle root and merkle proofs.
+# MerkleTree WhiteList NFT
+
+Simple implementation of a Merkle Tree whitelist for an NFT project.
+
+---
+
+### Libraries used...
+
+to generate the Merkle tree and verify a wallet is inside of the Merkle tree with the proof:
+
+- keccak256
+
+```
+npm i keccak256
+```
+
+- MerkleTreejs
+
+```
+npm i merkletreejs
+```
+
+```javascript
+const { MerkleTree } = require("merkletreejs");
+const keccak256 = require("keccak256");
+const wallet = keccak256("0x5B38Da6a701c568545dCfcB03FcB875f56beddC4");
+
+const leaves = [
+  "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",
+  "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+  "0x03C6FcED478cBbC9a4FAB34eF9f40767739D1Ff7",
+  "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+  "0x03C6FcED478cBbC9a4FAB34eF9f40767739D1Ff7",
+];
+
+// Create Root.
+const tree = new MerkleTree(leaves, keccak256, {
+  /** If set to `true`, the leaves will hashed using the set hashing algorithms. */
+  hashLeaves: true,
+  /** If set to `true`, the hashing pairs will be sorted. */
+  sortPairs: true,
+});
+
+// Get root hash of the tree.
+const root = tree.getHexRoot();
+
+// Get Proof from the root hash.
+const proof = tree.getHexProof(wallet);
+
+//Solidity needs it to have " double quotes" instead of `single quotes`
+const merkleProof = [
+  "0x9da258265696d227eef589fd6cd14671a82aa2963ec2214eb048fca5441c4a7e",
+  "0xcf1af5889bea11e72fa5ccf227f07abc63b97b8f599e45dff51bb45c16a680bd",
+  "0xbedabe7d0bfc2ec1d2a619d63dff4699d816c857675c1cd6ce376dd39ab5d092",
+  "0x1c6df1b72628f8ee596a55eaa3078be04c45ce70bd92b04a719c065f92165690",
+  "0x42d2024a9a9eb2572b5985038caf67e7af6228905cef6f38fe929b40f5c73d46",
+];
+
+module.exports = { merkleProof, root, wallet };
+```
