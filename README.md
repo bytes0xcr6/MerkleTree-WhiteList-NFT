@@ -1,12 +1,13 @@
 # MerkleTree WhiteList NFT
 
-Simple implementation of a Merkle Tree whitelist for an NFT project.
+![68747470733a2f2f75706c6f61642e77696b696d656469612e6f72672f77696b6970656469612f636f6d6d6f6e732f7468756d622f392f39352f486173685f547265652e7376672f3139323070782d486173685f547265652e7376672e706e67](https://user-images.githubusercontent.com/102038261/223790581-5f432975-4bdf-485b-8480-d5c6d5ad6ade.png)
+
+Simple implementation of a Merkle Tree Whitelist for an NFT smart contract.
+
 
 ---
 
-### Libraries used...
-
-to generate the Merkle tree and verify a wallet is inside of the Merkle tree with the proof:
+### Libraries used to generate the Merkle tree and verify a wallet is inside of the Merkle tree with the proof:
 
 - keccak256
 
@@ -19,6 +20,7 @@ npm i keccak256
 ```
 npm i merkletreejs
 ```
+⬇ <a href="https://github.com/CristianRicharte6/MerkleTree-WhiteList-NFT/blob/main/merkleTree.js" target="_blank">merkleTree.js</a> ⬇
 
 ```javascript
 const { MerkleTree } = require("merkletreejs");
@@ -57,4 +59,17 @@ const merkleProof = [
 ];
 
 module.exports = { merkleProof, root, wallet };
+```
+----------------
+## Development
+
+Install dependencies
+
+```
+npm install
+```
+
+Test the contract by passing an address in the Whitelist and an addres not in the Whitelist
+```
+npx hardhat test
 ```
