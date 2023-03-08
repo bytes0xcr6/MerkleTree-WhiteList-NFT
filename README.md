@@ -21,6 +21,8 @@ npm i keccak256
 ```
 npm i merkletreejs
 ```
+------------
+
 ⬇ <a href="https://github.com/CristianRicharte6/MerkleTree-WhiteList-NFT/blob/main/merkleTree.js" target="_blank">merkleTree.js</a> ⬇
 
 ```javascript
